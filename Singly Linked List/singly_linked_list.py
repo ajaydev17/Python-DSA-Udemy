@@ -17,8 +17,10 @@ class LinkedList:
         Prints the linked list
         """
         
+        # pointer to the head node
         current = self.head
         
+        # iterate through the linked list while current is not None
         while current:
             print(current.value, end="->")
             current = current.next
@@ -32,8 +34,11 @@ class LinkedList:
             value (int): value to be appended
         """
         
+        # create a new node with the given value
         new_node = Node(value)
         
+        # if the linked list is empty, set the head and tail to the new node 
+        # else set the tail's next to the new node and set the tail to the new node
         if self.head is None:
             self.head = new_node
             self.tail = new_node
@@ -52,16 +57,21 @@ class LinkedList:
             int: value of the last node
         """
         
+        # if the list is empty, return None
         if self.length == 0:
             return None
         
+        # set the current and previous nodes to the head and tail respectively
         current = self.head
         previous = self.head
         
+        # iterate through the list while the next node is not None
         while current.next is not None:
             previous = current
             current = current.next
-            
+        
+        # set the tail to the previous node and set the next of the previous node to None 
+        # so that the list is shorter by 1
         self.tail = previous
         self.tail.next = None
         self.length -= 1
@@ -80,8 +90,11 @@ class LinkedList:
             value (int): value to be prepended
         """
         
+        # create a new node with the given value
         new_node = Node(value)
         
+        # if the list is empty, set the head and tail to the new node 
+        # else set the next of the tail to the new node and set the tail to the new node
         if self.head is None:
             self.head = new_node
             self.tail = new_node
@@ -100,14 +113,18 @@ class LinkedList:
             int: value of the first node
         """
         
+        # if the list is empty, return None
         if self.length == 0:
             return None
         
+        # set the current node to the head and set the head to the next node 
+        # set the next of the current node to None so that the list is shorter by 1
         current = self.head
         self.head = self.head.next
         current.next = None
         self.length -= 1
         
+        # if the list is now empty, set the head and tail to None
         if self.length == 0:
             self.head = None
             self.tail = None
@@ -125,11 +142,14 @@ class LinkedList:
             Node: node at the given index
         """
         
+        # if the index is out of bounds, return None
         if index < 0 or index >= self.length:
             return None
         
+        # set the current node to the head
         current = self.head
         
+        # iterate through the list until the index is reached
         for _ in range(index):
             current = current.next
             
@@ -147,8 +167,10 @@ class LinkedList:
             bool: True if the value was set, False otherwise
         """
         
+        # get the node at the given index
         current = self.get(index)
         
+        # if the node exists, set the value of the node and return True
         if current:
             current.value = value
             return True
@@ -167,17 +189,22 @@ class LinkedList:
             bool: True if the value was inserted, False otherwise
         """
         
+        # if the index is out of bounds, return False
         if index < 0 or index >= self.length:
             return False
         
+        # if the index is 0, prepend the value to the list and return True
         if index == 0:
             return self.prepend(value)
         elif index == self.length - 1:
             return self.append(value)
         
+        # get the node at the previous index
         current = self.get(index - 1)
         new_node = Node(value)
         
+        # if the node exists, set the next of the node to the next node 
+        # set the next of the current node to the new node and increment the length by 1 and return True
         if current:
             new_node.next = current.next
             current.next = new_node
@@ -197,16 +224,21 @@ class LinkedList:
             Node: node at the given index
         """
         
+        # if the index is out of bounds, return None
         if index < 0 or index >= self.length:
             return None
         
+        # if the index is 0, pop the first node and return it
         if index == 0:
             return self.pop_first()
         elif index == self.length - 1:
             return self.pop()
         
+        # get the node at the previous index
         previous = self.get(index - 1)
         
+        # if the node exists, set the next of the previous node to the next node 
+        # set the next of the current node to None and decrement the length by 1 and return the current node
         if previous:
             target = previous.next
             previous.next = target.next
@@ -221,17 +253,22 @@ class LinkedList:
         Reverses the linked list in place
         """
         
+        # if the list is empty, return None
         if self.length == 0:
             return None
         
+        # if the list has only one node, return None
         if self.head == self.tail:
             return None
         
+        # set the current and previous nodes to the head and tail respectively
         current = self.head
         previous = None
         
+        # set the tail to the head
         self.tail = self.head
         
+        # iterate through the list while the next node is not None
         while current.next is not None:
             temp = current.next
             current.next = previous
@@ -248,12 +285,15 @@ class LinkedList:
             Node: middle node of the linked list
         """
         
+        # if the list is empty, return None
         if self.head is None:
             return None
         
+        # set the slow and fast nodes to the head and tail respectively
         slow = self.head
         fast = self.head
         
+        # iterate through the list while the next node is not None
         while fast is not None and fast.next is not None:
             slow = slow.next
             fast = fast.next.next
@@ -268,12 +308,15 @@ class LinkedList:
             bool: True if the linked list has a cycle, False otherwise
         """
         
+        # if the list is empty, return False
         if self.head is None:
             return False
         
+        # set the slow and fast nodes to the head and tail respectively
         slow = self.head
         fast = self.head
         
+        # iterate through the list while the next node is not None
         while fast is not None and fast.next is not None:
             slow = slow.next
             fast = fast.next.next
@@ -294,15 +337,18 @@ class LinkedList:
             Node: kth to last node of the linked list
         """
         
+        # set the slow and fast nodes to the head and tail respectively
         slow = self.head
         fast = self.head
         
+        # iterate k times
         for _ in range(k):
             if fast is None:
                 return None
             
             fast = fast.next
-            
+        
+        # iterate until the fast node is None
         while fast is not None:
             slow = slow.next
             fast = fast.next
@@ -314,11 +360,14 @@ class LinkedList:
         Removes duplicates from the linked list in O(n^2) time complexity
         """
         
+        # if the list is empty, return None
         if self.head is None:
             return None
         
+        # set the current node to the head
         current = self.head
         
+        # iterate through the list while the next node is not None
         while current is not None and current.next is not None:
             runner = current
             
@@ -336,13 +385,16 @@ class LinkedList:
         Removes duplicates from the linked list in O(n) time complexity
         """
         
+        # if the list is empty, return None
         if self.head is None:
             return None
         
+        # create a set to store the values
         values = set()
         current = self.head
         previous = None
         
+        # iterate through the list while the next node is not None
         while current is not None:
             if current.value in values:
                 previous.next = current.next
@@ -358,17 +410,103 @@ class LinkedList:
         Converts a binary number to decimal
         """
         
+        # if the list is empty, return 0
         if self.head is None:
             return 0
         
+        # set the current node to the head
         current = self.head
         decimal = 0
         
+        # iterate through the list while the next node is not None
         while current is not None:
             decimal = decimal * 2 + current.value
             current = current.next
             
         return decimal
+    
+    def partition(self, x):
+        """
+        Partitions the linked list around a value x
+
+        Args:
+            x (int): value around which the linked list is to be partitioned
+        """
+        
+        # if the list is empty, return None
+        if self.head is None:
+            return None
+        
+        # create two dummy nodes
+        dummy1 = Node(0)
+        dummy2 = Node(0)
+        
+        # set the previous1 and previous2 nodes to the dummy1 and dummy2 nodes respectively
+        previous1 = dummy1
+        previous2 = dummy2
+        current = self.head
+        
+        # iterate through the list while the next node is not None
+        while current is not None:
+            if current.value < x:
+                previous1.next = current
+                previous1 = current
+            else:
+                previous1.next = current
+                previous1 = current
+                
+            current = current.next
+        
+        # set the next of the previous1 node to the dummy2 node and set the head to the dummy1 node
+        previous1.next = dummy2.next
+        self.head = dummy1.next
+        previous2.next = None
+        
+    def reverse_between(self, start, end):
+        """
+        Reverses the linked list between start and end
+
+        Args:
+            start (int): index of the first node to be reversed
+            end (int): index of the last node to be reversed
+        """
+        
+        # if the list is empty, return None
+        if self.head is None:
+            return None
+        
+        # if the start index is out of bounds, return None
+        if start < 0 or start >= self.length:
+            return None
+        
+        # if the end index is out of bounds, return None
+        if end < 0 or end >= self.length:
+            return None
+        
+        # if the start index is greater than the end index, return None
+        if start > end:
+            return None
+        
+        # create a dummy node
+        dummy = Node(0)
+        dummy.next = self.head
+        previous = dummy
+        
+        # iterate start times
+        for _ in range(start):
+            previous = previous.next
+            
+        current = previous.next
+        
+        # iterate end - start times
+        for _ in range(end - start):
+            node_to_move = current.next
+            
+            current.next = node_to_move.next
+            node_to_move.next = previous.next
+            previous.next = node_to_move
+            
+        self.head = dummy.next
         
         
 linked_list = LinkedList()
