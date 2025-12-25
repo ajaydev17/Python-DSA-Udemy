@@ -508,6 +508,33 @@ class LinkedList:
             
         self.head = dummy.next
         
+    def swap_pairs(self):
+        """
+        Swaps the pairs of nodes in the linked list
+        """
+        
+        # if the list is empty, return None
+        if self.head is None:
+            return None
+        
+        dummy = Node(0)
+        dummy.next = self.head
+        previous = dummy
+        first = self.head
+        
+        # iterate through the list while the next node is not None
+        while first and first.next:
+            second = first.next
+            
+            previous.next = second
+            first.next = second.next
+            second.next = first
+            
+            previous = first
+            first = first.next
+            
+        self.head = dummy.next
+        
         
 linked_list = LinkedList()
 linked_list.append(1)
