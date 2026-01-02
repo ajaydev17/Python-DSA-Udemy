@@ -573,7 +573,63 @@ class LinkedList:
             pointer2 = pointer2.next if pointer2 else list1
             
         return pointer1
+    
+    def remove_elements(self, value):
+        """
+        Removes all nodes with the given value from the linked list
+        """
         
+        dummy = Node(0)
+        dummy.next = self.head
+        previous = dummy
+        current = self.head
+        
+        while current is not None:
+            if current.value == value:
+                previous.next = current.next
+                self.length -= 1
+            else:
+                previous = current
+            current = current.next
+            
+        self.head = dummy.next
+        
+    def check_palindrome(self):
+        """
+        Checks if the linked list is a palindrome
+        """
+        
+        if self.head is None or self.head.next is None:
+            return False
+        
+        slow = self.head
+        fast = self.head
+        
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            
+        previous = None
+        current = slow
+        
+        while current is not None:
+            next = current.next
+            current.next = previous
+            previous = current
+            current = next
+            
+        left = self.head
+        right = previous
+        
+        while right is not None:
+            if left.value != right.value:
+                return False
+            left = left.next
+            right = right.next
+            
+        return True
+    
+    
 linked_list = LinkedList()
 linked_list.append(1)
 linked_list.append(2)
