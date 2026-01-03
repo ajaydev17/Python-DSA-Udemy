@@ -26,3 +26,19 @@ class LinkedList:
             print(current.value, end="->")
             current = current.next
         print("None")
+        
+    def append(self, value):
+        """
+        Appends a new node to the end of the linked list
+        """
+        
+        new_node = Node(value)
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        self.length += 1
+        return True
