@@ -190,13 +190,13 @@ class LinkedList:
         """
         
         # if the index is out of bounds, return False
-        if index < 0 or index >= self.length:
+        if index < 0 or index > self.length:
             return False
         
         # if the index is 0, prepend the value to the list and return True
         if index == 0:
             return self.prepend(value)
-        elif index == self.length - 1:
+        elif index == self.length:
             return self.append(value)
         
         # get the node at the previous index

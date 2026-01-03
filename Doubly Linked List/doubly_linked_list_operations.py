@@ -94,3 +94,22 @@ class LinkedList:
             temp.next = None
         self.length -= 1
         return temp
+    
+    def get(self, index):
+        """
+        Gets the node at the given index
+        """
+        
+        if index < 0 or index >= self.length:
+            return None
+        
+        if index < self.length // 2:
+            current = self.head
+            for _ in range(index):
+                current = current.next
+            return current
+        else:
+            current = self.tail
+            for _ in range(self.length - 1, index, -1):
+                current = current.prev
+            return current
