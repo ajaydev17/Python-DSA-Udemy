@@ -113,3 +113,14 @@ class LinkedList:
             for _ in range(self.length - 1, index, -1):
                 current = current.prev
             return current
+        
+    def set(self, index, value):
+        """
+        Sets the value at the given index
+        """
+        
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+        return False
