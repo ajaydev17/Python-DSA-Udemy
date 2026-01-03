@@ -129,6 +129,7 @@ class LinkedList:
         """
         Inserts a new node with the given value at the given index
         """
+        
         if index < 0 or index > self.length:
             return False
         
@@ -147,3 +148,23 @@ class LinkedList:
         before.next = new_node
         self.length += 1
         return True
+    
+    def remove(self, index):
+        """
+        Removes the node at the given index
+        """
+        
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        elif index == self.length - 1:
+            return self.pop()
+        
+        temp = self.get(index)
+        temp.next.prev = temp.prev
+        temp.prev.next = temp.next
+        temp.next = None
+        temp.prev = None
+        self.length -= 1
+        return temp
