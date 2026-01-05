@@ -33,7 +33,7 @@ class LinkedList:
         self.tail = self.head
         
         # iterate through the list while the next node is not None
-        while current.next is not None:
+        while current is not None:
             temp = current.next
             current.next = previous
             previous = current
