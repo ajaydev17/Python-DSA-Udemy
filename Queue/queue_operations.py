@@ -56,3 +56,12 @@ class Queue:
         temp.next = None
         self.length -= 1
         return temp
+
+    def peek(self):
+        """
+        Returns the value of the first node without removing it
+        """
+        
+        if self.length == 0:
+            return None
+        return self.first.value
