@@ -24,3 +24,18 @@ class Queue:
             print(current.value, end="->")
             current = current.next
         print("None")
+
+    def enqueue(self, value):
+        """
+        Enqueues a new node with the given value to the end of the queue
+        """
+        
+        new_node = Node(value)
+        if self.length == 0:
+            self.first = new_node
+            self.last = new_node
+        else:
+            self.last.next = new_node
+            self.last = new_node
+        self.length += 1
+        return True
