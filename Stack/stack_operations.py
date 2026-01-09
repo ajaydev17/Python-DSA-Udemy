@@ -57,3 +57,12 @@ class Stack:
         temp.next = None
         self.height -= 1
         return temp
+
+    def peek(self):
+        """
+        Returns the value of the top node without removing it
+        """
+        
+        if self.height == 0:
+            return None
+        return self.top.value
