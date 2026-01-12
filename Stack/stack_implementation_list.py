@@ -35,3 +35,12 @@ class Stack:
         if self.is_empty():
             return None
         return self.stack.pop()
+
+    def peek(self):
+        """
+        Returns the value of the top node without removing it
+        """
+        
+        if self.is_empty():
+            return None
+        return self.stack[-1]
