@@ -19,3 +19,19 @@ class Stack:
         
         self.stack.append(value)
         return True
+
+    def is_empty(self):
+        """
+        Returns True if the stack is empty, False otherwise
+        """
+        
+        return len(self.stack) == 0
+
+    def pop(self):
+        """
+        Pops the top node from the stack
+        """
+
+        if self.is_empty():
+            return None
+        return self.stack.pop()
