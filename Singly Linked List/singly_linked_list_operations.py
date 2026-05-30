@@ -1,18 +1,18 @@
 # node definition
 class Node:
-    def __init__(self, value):
+    def __init__(self, value) -> None:
         self.value = value
         self.next = None
         
         
 # linked list definition
 class LinkedList:
-    def __init__(self):
+    def __init__(self) -> None:
         self.head = None
         self.tail = None
         self.length = 0
         
-    def print_list(self):
+    def print_list(self) -> None:
         """
         Prints the linked list
         """
@@ -26,7 +26,7 @@ class LinkedList:
             current = current.next
         print("None")
             
-    def append(self, value):
+    def append(self, value: int) -> bool:
         """
         Appends a value to the linked list
 
@@ -49,12 +49,12 @@ class LinkedList:
         self.length += 1
         return True
         
-    def pop(self):
+    def pop(self) -> Node | None:
         """
         Pops the last value from the linked list
         
         Returns:
-            int: value of the last node
+            Node | None: last node in the linked list or None if the list is empty
         """
         
         # if the list is empty, return None
@@ -82,7 +82,7 @@ class LinkedList:
             
         return current
     
-    def prepend(self, value):
+    def prepend(self, value: int) -> bool:
         """
         Prepends a value to the linked list
 
@@ -105,12 +105,12 @@ class LinkedList:
         self.length += 1
         return True
         
-    def pop_first(self):
+    def pop_first(self) -> Node | None:
         """
         Pops the first value from the linked list
 
         Returns:
-            int: value of the first node
+            Node | None: first node in the linked list or None if the list is empty
         """
         
         # if the list is empty, return None
@@ -131,7 +131,7 @@ class LinkedList:
             
         return current
     
-    def get(self, index):
+    def get(self, index: int) -> Node | None:
         """
         Gets the value at the given index
 
@@ -139,7 +139,7 @@ class LinkedList:
             index (int): index of the value to be returned
 
         Returns:
-            Node: node at the given index
+            Node | None: node at the given index or None if index is out of bounds
         """
         
         # if the index is out of bounds, return None
@@ -155,7 +155,7 @@ class LinkedList:
             
         return current
     
-    def set(self, index, value):
+    def set(self, index: int, value: int) -> bool:
         """
         Sets the value at the given index
 
@@ -177,7 +177,7 @@ class LinkedList:
         
         return False
     
-    def insert(self, index, value):
+    def insert(self, index: int, value: int) -> bool:
         """
         Inserts a value at the given index
 
@@ -213,7 +213,7 @@ class LinkedList:
         
         return False
     
-    def remove(self, index):
+    def remove(self, index: int) -> Node | None:
         """
         Removes the value at the given index
 
@@ -221,7 +221,7 @@ class LinkedList:
             index (int): index of the value to be removed
 
         Returns:
-            Node: node at the given index
+            Node | None: node at the given index or None if index is out of bounds
         """
         
         # if the index is out of bounds, return None
